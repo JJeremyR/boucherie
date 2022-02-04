@@ -1,0 +1,21 @@
+.navbar-item-custom, .navbar-item-custom a{
+    color: white;
+}
+.footer-custom{
+    text-align: center;
+    position:static;
+    bottom: 0;
+    width: 100%;
+    background-color: #dfeaff;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+.body-custom{
+    padding: 0;
+}
+
+
+/* Ne Fonctionne Pas
+.body-custom{background-image: url(../img/background.jpg);}
+.logo-custom{background-image: url(../img/brand.png);}
+.header-custom{background-image: url(../img/header.jpg);}*/
