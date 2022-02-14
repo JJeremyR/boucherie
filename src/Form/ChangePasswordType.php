@@ -32,7 +32,7 @@ class ChangePasswordType extends AbstractType
                 'first_options'=>['label'=>'Nouveau Mot De Passe', 'attr'=>['placeholder'=>'*********']],
                 'second_options'=>['label'=>'Confirmation Nouveau Mot De Passe', 'attr'=>['placeholder'=>'*********']],
             ])
-            ->add('submit', SubmitType::class, ['label'=>'Modifier'])
+            ->add('submit', SubmitType::class, ['label'=>'Modifier', 'attr'=>['class'=>'btn btn-block btn-lg btn-warning mt-3']])
         ;
     }
 

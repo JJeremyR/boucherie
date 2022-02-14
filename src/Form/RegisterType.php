@@ -52,7 +52,7 @@ class RegisterType extends AbstractType
                 'first_options'=>['label'=>'Mot De Passe', 'attr'=>['placeholder'=>'*********']],
                 'second_options'=>['label'=>'Confirmation Mot De Passe', 'attr'=>['placeholder'=>'*********']],
             ])
-            ->add('submit', SubmitType::class, ['label'=>'S\'inscrire'])
+            ->add('submit', SubmitType::class, ['label'=>'S\'inscrire', 'attr'=>['class'=>'btn btn-block btn-lg btn-warning mt-3']])
         ;
     }
 

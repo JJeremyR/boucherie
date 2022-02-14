@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valider Ma Commande{% endblock %}
+
+{% block content %}
+<h1>Valider Ma Commande</h1>
+<p>Choisissez vos preferences avant de passer votre commande.</p>
+<hr>
+<div class="row">
+    <div class="col-md-4">
+    {% set formhtml %}
+        {{ form(form) }}
+    {% endset %}
+    {{ formhtml|replace({'[br]' : '<br>'})|raw }}
+    </div>
+
+    <div class="col-md-8">
+    <div class="text-center">
+    <span class="col-form-label">Recapitulatif de la commande</span>
+    <p class="td-light">Retrouvez le récapitulatif de vos produits.</p>
+    <div class="order-summary">
+    <table class="table table-hover text-center mt-3">
+    <tbody>
+    {% for product in cart %}
+        <tr>
+        <th class="align-middle">
+            <img src="/uploads/{{ product.product.illustration }}" alt="{{ product.product.name }}" height='80px'>
+        </th>
+        <th class="align-middle td-light">
+            {{ product.product.name }} <br>
+            <small>{{ product.product.description }}</small>
+        </th>
+        <td class="align-middle td-light">
+            <a href="{{ path('sub_to_cart', {'id' : product.product.id }) }}">
+                <img src="{{ asset('assets/img/minus.png') }}" alt="Soustraire" height="15px" class="mx-2">
+            </a>
+            {{ product.quantity }}
+            <a href="{{ path('add_to_cart', {'id' : product.product.id }) }}">
+                <img src="{{ asset('assets/img/plus.png') }}" alt="Ajouter" height="15px" class="mx-2">
+            </a>
+        </td>
+        <td class="align-middle td-light">{{ ((product.product.price * product.quantity) / 100)|number_format(2, ',', '.') }} €</td>
+        <td class="align-middle">
+            <a href="{{ path('delete_to_cart', {'id' : product.product.id }) }}">
+                <img src="{{ asset('assets/img/trash.png') }}" alt="Supprimer" height="20px">
+            </a>
+        </td>
+        </tr>  
+    {% endfor %}
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,15 +1,22 @@
 body{
     position: relative;
-    padding-bottom: 0;
-    /*background-image: url(../img/background.jpg);*/
+    padding-top:0 !important;
+    padding-bottom: 0 !important;
+    background-image: url(../img/background.jpg);
+    /*background-repeat: repeat;*/
+    background-size: contain;
 }
-a{
-    text-decoration: none;
+a{text-decoration: none;}
+.container-custom{
+    background-image: url(../img/header.jpg);
 }
-
-/*
-header{background-image: url(../img/header.jpg);}
-.logo-custom{background-image: url(../img/brand.png);}*/
+.navbar-custom{
+    z-index: 0;
+    color: #000000;
+    background: transparent !important;
+    padding: 0 !important;
+    height: 200px;
+}
 .navbar-item-custom, .navbar-item-custom a{
     color: white;
 }
@@ -18,7 +25,8 @@ header{background-image: url(../img/header.jpg);}
     position:absolute;
     /*bottom: 0;*/
     width: 100%;
-    background-color: #dfeaff;
+    background-color: transparent !important /*#dfeaff*/;
+    background-image: url(../img/header.jpg);
     padding-top: 25px;
     margin-top: 50px;
 }
@@ -26,17 +34,16 @@ header{background-image: url(../img/header.jpg);}
     margin-bottom: 150px;
 }
 .product-item-custom{
-    border: 1px solid grey;
     text-align: center;
     margin: 20px;
 }
 .product-item-custom:hover{
-    border: 1px solid grey;
-    box-shadow: 10px 10px 15px 5px rgba(0,0,0,0.5),
-                10px -10px 15px 5px rgba(0,0,0,0.5),
-               -10px 10px 15px 5px rgba(0,0,0,0.5),
-               -10px -10px 15px 5px rgba(0,0,0,0.5);
+    box-shadow: 10px 10px 15px 5px rgba(255,215,0,0.5),
+                10px -10px 15px 5px rgba(255,215,0,0.5),
+               -10px 10px 15px 5px rgba(255,215,0,0.5),
+               -10px -10px 15px 5px rgba(255,215,0,0.5);
     text-align: center;
+    padding:0 !important;
     margin: 5px;
 }
 .product-item-custom a{
@@ -64,4 +71,25 @@ header{background-image: url(../img/header.jpg);}
     height: 30px;
     margin-left: 20px;
     margin-right: 10px;
+}
+.block-small{
+    max-width: 600px;;
+    margin: 0 auto;
+}
+.form-check{
+    color:white;
+    padding:20px 65px;
+}
+.col-form-label{
+    color:white;
+    font-weight: bolder;
+}
+.order-summary{
+    padding: 20px;
+    margin-top: 22px;
+    
+}
+
+.td-light{
+    color:white;
 }

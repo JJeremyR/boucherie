@@ -15,6 +15,21 @@
                 <div class="col-md-4">
                     <div class="product-item-custom">
                         <a href="{{ path('product', { 'slug' : product.slug } ) }}">
+                        <div class="card border-warning">
+                            <img class="card-img-top" src="/uploads/{{ product.illustration }}" alt="{{ product.name }}">                        
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                <span class="product-sub">{{ product.subtitle }}</span>
+                                <span class="product-price">{{ (product.price / 100)|number_format(2, ',', '.' ) }} €</span>          
+                            </div>
+                        </div>
+                        </a> 
+                    </div>
+                </div>
+<!--
+                <div class="col-md-4">
+                    <div class="product-item-custom">
+                        <a href="{{ path('product', { 'slug' : product.slug } ) }}">
                             <img class="img-fluid" src="/uploads/{{ product.illustration }}" alt="{{ product.name }}">
                             <h5>{{ product.name }}</h5>
                             <span class="product-sub">{{ product.subtitle }}</span>
@@ -22,6 +37,7 @@
                         </a>
                     </div>
                 </div>
+-->
             {% endfor %}
             </div>
         </div>
