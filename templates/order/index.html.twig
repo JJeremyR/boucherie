@@ -3,13 +3,17 @@
 {% block title %}Valider Ma Commande{% endblock %}
 
 {% block content %}
-<h1>Valider Ma Commande</h1>
-<p>Choisissez vos preferences avant de passer votre commande.</p>
+<!-- Logo a mettre en Blanc -->
+<h1 class="td-light">Valider Ma Commande</h1>
+<p class="td-light">Choisissez vos preferences avant de passer votre commande.</p>
 <hr>
 <div class="row">
     <div class="col-md-4">
     {% set formhtml %}
-        {{ form(form) }}
+        {{ form_start(form, {action:path('order-recap')}) }}
+            {{ form_label(form.adresses, 'Adresse De Livraison') }}
+            <a href="{{ path('add_adress') }}">Ajouter Une Nouvelle Adresse</a>
+        {{ form_end(form) }}
     {% endset %}
     {{ formhtml|replace({'[br]' : '<br>'})|raw }}
     </div>

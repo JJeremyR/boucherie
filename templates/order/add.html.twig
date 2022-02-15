@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement De Ma Commande{% endblock %}
+
+{% block content %}
+<h1 class="td-light">Recapitulatif De Ma Commande</h1>
+<p class="td-light">Veuillez verifier vos informations avant de payer votre commande.</p>
+<hr>
+<div class="row td-light">
+    <div class="col-md-4">
+       <strong> Mon Adresse De Livraison: </strong><br>
+       <div class="form-check">
+           <span>{{ delivery|raw }}</span>
+       </div>
+        <hr>
+        <strong> Mon Transporteur: </strong><br>
+        <div class="form-check">
+            <span>{{ carrier.name }}</span> <br>
+            <span>{{carrier.description }}</span> <br>
+            <span>{{ carrier.price|number_format(2, ',', '.') }} €</span>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="text-center">
+        <span class="col-form-label">Ma Commande</span>
+            <div class="order-summary">
+                <table class="table table-hover text-center mt-3">
+<!--                    <thead>
+                        <tr>
+                            <th scope="col">Produit</th>
+                            <th scope="col"></th>
+                            <th scope="col">Quantité</th>
+                            <th scope="col">Prix Total</th>
+                        </tr>
+                    </thead>
+-->                    <tbody>
+                    {% set article = 0 %}
+                    {% set total = null %}
+                    {% for product in cart %}
+                        <tr>
+                            <th class="align-middle">
+                                <img src="/uploads/{{ product.product.illustration }}" alt="{{ product.product.name }}" height='80px'>
+                            </th>
+                            <th class="align-middle td-light">
+                                {{ product.product.name }} <br>
+                                <small>{{ product.product.description }}</small>
+                            </th>
+                            <td class="align-middle td-light">
+                                {{ product.quantity }}
+                            </td>
+                            <td class="align-middle td-light">
+                                {{ ((product.product.price * product.quantity) / 100)|number_format(2, ',', '.') }} €
+                            </td>
+                            <td class="align-middle">
+
+                            </td>
+                        </tr>  
+                    {% set article = article + (product.quantity) %}
+                    {% set total = total + (product.product.price * product.quantity) %}
+                    {% endfor %}
+                    <div class="col text-left">
+                        <b class="m-2">Nombre de Produits : {{ cart|length}} </b> <br>
+                        <b class="m-2">Nombre d'Articles : {{ article }} </b>
+                    </div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col text-right">
+            <strong>Sous-Total:</strong> <b class="m-2"> {{ (total / 100)|number_format(2, ',', '.') }} € </b> <br>
+            <strong>Livraison:</strong> <b class="m-2"> {{ (carrier.price)|number_format(2, ',', '.') }} € </b> <br>
+        </div>
+        <div class="text-center">
+            <hr>
+            <strong>Total:</strong> <b class="m-2"> {{ ((total / 100) + carrier.price)|number_format(2, ',', '.') }} € </b> <br>
+            <hr>
+            <a href="" class="btn btn-block btn-warning mt-3">Payer {{ ((total / 100) + carrier.price)|number_format(2, ',', '.') }} € </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

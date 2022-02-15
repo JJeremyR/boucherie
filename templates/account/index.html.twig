@@ -3,14 +3,15 @@
 {% block title %}Compte Perso Boucherie{% endblock %}
 
 {% block content %}
-    <h1>Mon Compte</h1>
-    Bienvenue {{app.user.firstname}} dans votre compte.<br> c'est ici que vous pourrez gerer vos informations personnelles.
-    <br>
-    <br>
-    <h3>TODO LIST:</h3>
-    - <a href="{{ path('account_password') }}"> Modifier mon MDP </a><br>
-    - <a href="{{ path('account_adress') }}"> Ajouter mes adresses </a><br>
-    - Page Mes commandes <br>
-    <br>
-
+    <div class="td-light">
+        <h1>Mon Compte</h1>
+        Bienvenue {{app.user.firstname}} dans votre compte.<br> c'est ici que vous pourrez gerer vos informations personnelles.
+        <br>
+        <br>
+        <h3>TODO LIST:</h3>
+        - <a href="{{ path('account_password') }}"> Modifier mon MDP </a><br>
+        - <a href="{{ path('account_adress') }}"> Ajouter mes adresses </a><br>
+        - Page Mes commandes <br>
+        <br>
+    </div>
 {% endblock %}

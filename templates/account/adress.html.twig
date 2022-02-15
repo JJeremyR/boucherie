@@ -3,41 +3,42 @@
 {% block title %}Mes Adresses{% endblock %}
 
 {% block content %}
-    <a href="{{ path('add_adress') }}" class="btn btn-warning btn-sm float-right">Ajouter une Adresse</a>
-    <h1>Mes Adresses</h1>
+    <div class="td-light">
+        <a href="{{ path('add_adress') }}" class="btn btn-warning btn-lg align-middle float-right">Ajouter une Adresse</a>
+        <h1>Mes Adresses</h1>
 
-    c'est ici que vous pourrez gerer vos adresses de livraison.
-    <br>
-    <a href="{{ path('account') }}"> Retour au compte </a><br>
-    <br>
-    {% if app.user.adresses|length == 0 %}
-        <p class="text-center">
-            Vous n'avez aucune adresse de répertoriée pour le moment. <br>
-            Veuillez en ajouter une en <a href="{{ path('add_adress') }}"> cliquant ici </a> <br>
-        </p>
-        {% else %}
-            <div class="row">
-                {% for adress in app.user.adresses %}
-                <div class="col-md-4 product-item-custom">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h3 class="card-title">{{ adress.name }}</h3>
-                            <br>
-                            <p class="card-text">
-                                {{ adress.firstname}} {{adress.lastname}} <br>
-                                {{ adress.adress }} <br>
-                                {{ adress.postal }} - {{ adress.city }} <br>
-                            </p>
-                            <br>
-                            <a href="{{ path('edit_adress', {'id': adress.id}) }}" class="btn-sm btn-warning m-1">Modifier Adresse</a>
+        c'est ici que vous pourrez gerer vos adresses de livraison.
+        <br>
+        <a href="{{ path('account') }}"> Retour au compte </a><br>
+        <br>
+    </div>
+        {% if app.user.adresses|length == 0 %}
+            <p class="text-center td-light">
+                Vous n'avez aucune adresse de répertoriée pour le moment. <br>
+                Veuillez en ajouter une en <a href="{{ path('add_adress') }}"> cliquant ici </a> <br>
+            </p>
+            {% else %}
+                <div class="row">
+                    {% for adress in app.user.adresses %}
+                    <div class="col-md-4 product-item-custom">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h3 class="card-title">{{ adress.name }}</h3>
+                                <br>
+                                <p class="card-text">
+                                    {{ adress.firstname}} {{adress.lastname}} <br>
+                                    {{ adress.adress }} <br>
+                                    {{ adress.postal }} - {{ adress.city }} <br>
+                                </p>
+                                <br>
+                                <a href="{{ path('edit_adress', {'id': adress.id}) }}" class="btn-sm btn-warning m-1">Modifier Adresse</a>
                             
-                            <a href="{{ path('delete_adress', {'id': adress.id}) }}" class="btn-sm btn-warning m-1">Supprimer Adresse</a>
+                                <a href="{{ path('delete_adress', {'id': adress.id}) }}" class="btn-sm btn-warning m-1">Supprimer Adresse</a>
+                            </div>
                         </div>
-                    </div>
-                </div>    
-                {% endfor %}
-            </div>
-
-    {% endif %}
-    <br>
+                    </div>    
+                    {% endfor %}
+                </div>
+        {% endif %}
+        <br>
 {% endblock %}

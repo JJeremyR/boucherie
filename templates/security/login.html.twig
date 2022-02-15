@@ -3,7 +3,7 @@
 {% block title %}Connexion a votre Compte{% endblock %}
 
 {% block content %}
-    <div class="block-small">
+    <div class="block-small td-light">
         <form method="post">
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
