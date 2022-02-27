@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nous Contacter{% endblock %}
+
+{% block content %}
+    <div class="td-light">
+        <h1>Nous Contacter</h1>
+        <hr>
+        <h3>Formulaire de contact :</h3>
+        <br>
+        <p class="text-center">
+            En cas de probleme avec une commande, merci de choisir le sujet "Service Client", <br>
+            S'il s'agit d'un probleme lié au site ou a votre compte perso, merci de choisir le sujet "WebMaster" <br>
+            N'hesitez pas a prendre contact avec notre equipe, nous vous repondrons dans les plus brefs delais. <br>
+        </p>
+        <br>
+            {% for message in app.flashes('notice') %}
+                <div class="alert alert-warning">
+                    {{ message|raw }}
+                </div>
+            {% endfor %}
+
+        <div class="row">
+            <div class="col-md-8">
+                {{ form_start(form) }}
+                <div class="row">
+                    <div class="col-lg-6">
+                        {{ form_row(form.firstname)}}
+                    </div>
+                    <div class="col-lg-6">
+                        {{ form_row(form.lastname)}}
+                    </div>
+                </div>
+                    {{ form_row(form.email) }}
+                    <hr>
+                    <div class="text-center">
+                        {{ form_row(form.subject) }}
+                    </div>
+                    <hr>
+                    {{ form_row(form.content) }}
+                    <br>
+                    {{ form_row(form.submit) }}
+                {{ form_end(form) }}
+                <br>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <strong><h3>Boucherie Benoit Paux</h3></strong>
+                    <hr>
+                    <strong>Adresse :</strong><p>4 La Place <br> 62910 Éperlecques</p>
+                    <strong>Tel : </strong><p>03.21.88.13.26</p>
+                    <strong>E-mail :</strong> <p><a href="mailto:benoit-paux@boucherie.fr"> benoit-paux@boucherie.fr </a></p>
+                    <hr>
+                    <strong>Horaires d'Ouvertures :</strong> 
+                        <hr>
+                        <table class="table table-bordered border-light" style="border: 2px solid white;border-collapse: collapse;">
+                            <thead class="table-dark">
+                                <th></th>
+                                <th>Matin</th>
+                                <th>Apres-Midi</th>
+                            </thead>
+                            <tbody class="bg-warning table-hover">
+                                <tr>
+                                    <th class="table-dark">Lundi :</th>
+                                    <td colspan="2"> Fermé </td>
+                                </tr>
+                                <tr>
+                                    <th class="table-dark">Mardi :</th>
+                                    <td rowspan="4" style="vertical-align: middle;">08:30–12:30</td>
+                                    <td rowspan="4" style="vertical-align: middle;">14:30–19:00</td>
+                                </tr>
+                                <tr>
+                                    <th class="table-dark">Mercredi :</th>
+                                </tr>
+                                <tr>
+                                    <th class="table-dark">Jeudi :</th>
+                                </tr>
+                                <tr>
+                                    <th class="table-dark">Vendredi :</th>
+                                </tr>
+                                <tr>
+                                    <th class="table-dark">Samedi :</th>
+                                    <td colspan="2">08:30–17:30</td>
+                                </tr>
+                                <tr>
+                                    <th class="table-dark">Dimanche :</th>
+                                    <td colspan="2"> Fermé </td>
+                                </tr>                                 
+                            </tbody>
+                        </table>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+{% endblock %}

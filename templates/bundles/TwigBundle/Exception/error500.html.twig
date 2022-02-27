@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page Introuvable - Erreur 500{% endblock %}
+
+{% block content %}
+    <div class="block-small td-light text-center">
+        <h1>Page Introuvable - Erreur 500</h1>
+        <br>
+        <p>
+            Désolé, la page a laquelle vous vouliez acceder n'est pas disponible pour le moment.
+        </p>
+            <br>
+        <p>    
+            Il semblerait que notre serveur ai rencontré un probleme.
+            Veuillez réessayer ulterieurment.
+        </p>
+            <br>
+        <a href="{{ path('home') }}" class="btn btn-warning">Retour a L'accueil</a>
+            <br>
+            <hr>
+            <br>
+        <p>
+            Si ce probleme persiste, vous pouvez aussi <a href="">contacter le webmaster</a>
+        </p>
+    </div>
+{% endblock %}

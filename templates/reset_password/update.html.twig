@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réinitialisation Du Mot De Passe{% endblock %}
+
+{% block content %}
+    <div class="block-small td-light">
+        {% for message in app.flashes('notice') %}
+            <div class="alert alert-warning">
+                {{ message|raw }}
+            </div>
+        {% endfor %}
+        <h1 class="h3 m-3 font-weight-normal">Réinitialisation Du Mot De Passe</h1>
+        {{ form(form) }}
+    </div>
+
+{% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classes\Mail;
 use App\Entity\User;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,25 +26,45 @@ class RegisterController extends AbstractController
      */
     public function index(Request $request, UserPasswordHasherInterface $encoder): Response
     {
+        $notif = null;
+
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-
             $user = $form->getData();
 
-            $password = $encoder->hashPassword($user, $user->getPassword());
-            $user->setPassword($password);
-            
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
+            $search_email = $this->entityManager->getRepository(User::class)->findOneByEmail($user->getEmail());
+
+            if (!$search_email){
+                $password = $encoder->hashPassword($user, $user->getPassword());
+                $user->setPassword($password);
+                
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
+    
+                $mail = new Mail();
+                
+                $client = $user->getFirstName();
+                $message = "Vous pouvrez des a present vous connecter a votre compte perso, <br> Et Commencer a remplir votre panier afin d'effectuer votre premiere commande! <br>";
+                $envoi = $user->getEmail();
+                $sujet = "Bienvenue -  Inscription Reussie";
+                $contenu = "Bonjour" . $client . ", <br> Bienvenue sur la boutique Web de la Boucherie Benoit Paux. <br>" . $message;
+                $mail->send($envoi, $client, $sujet, $contenu);
+
+                $notif = "Votre Inscription a bien été enregistrée, vous pouvez dorenavant vous connecter a votre compte perso";
+            } else {
+                $notif = "Un compte associé a cet email est deja existant!";
+            }
+
 
         }
 
         return $this->render('register/index.html.twig', [
             'form'=>$form->createView(),
+            'notif' => $notif,
         ]);
     }
 }

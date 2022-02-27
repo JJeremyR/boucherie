@@ -52,9 +52,19 @@ class Order
     private $orderDetails;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="string", length=255)
      */
-    private $isPaid;
+    private $reference;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $stripeSessionId;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $state;
 
     public function __construct()
     {
@@ -69,6 +79,16 @@ class Order
             $total = $total + ($product->getPrice() * $product->getQuantity());
         }
         return $total;
+    }
+
+    public function getFinal(): ?float
+    {
+        $final = $this->getTotal() + $this->getCarrierPrice();
+        //$products = $this->getTotal();
+        //$carrier = $this->getCarrierPrice();
+        //$final = $products + $carrier;
+
+        return $final;
     }
 
     public function getId(): ?int
@@ -166,14 +186,38 @@ class Order
         return $this;
     }
 
-    public function getIsPaid(): ?bool
+    public function getReference(): ?string
     {
-        return $this->isPaid;
+        return $this->reference;
     }
 
-    public function setIsPaid(bool $isPaid): self
+    public function setReference(string $reference): self
     {
-        $this->isPaid = $isPaid;
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    public function getStripeSessionId(): ?string
+    {
+        return $this->stripeSessionId;
+    }
+
+    public function setStripeSessionId(?string $stripeSessionId): self
+    {
+        $this->stripeSessionId = $stripeSessionId;
+
+        return $this;
+    }
+
+    public function getState(): ?int
+    {
+        return $this->state;
+    }
+
+    public function setState(int $state): self
+    {
+        $this->state = $state;
 
         return $this;
     }

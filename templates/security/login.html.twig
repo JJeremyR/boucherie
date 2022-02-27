@@ -9,6 +9,12 @@
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
 
+            {% for message in app.flashes('notice') %}
+                <div class="alert alert-warning">
+                    {{ message|raw }}
+                </div>
+            {% endfor %}
+
             {% if app.user %}
                 <div class="m-3">
                     Vous Etes Connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Deconnexion</a>
@@ -33,6 +39,12 @@
                     </label>
                 </div>
             #}
+            <br>
+            <div class="text-center">
+                <a href="{{ path('reset_password') }}">
+                    Mot De Passe Oublié ?!
+                </a>
+            </div>
             <br>
             <button class="btn-lg btn-block btn-warning m-3" type="submit">
                 Se Connecter

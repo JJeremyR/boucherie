@@ -6,7 +6,7 @@ use App\Classes\Cart;
 use App\Entity\Order;
 use App\Entity\OrderDetails;
 use App\Form\OrderType;
-use DateTime;
+use DateTime; //
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -78,16 +78,16 @@ class OrderController extends AbstractController
 
             /* enregistrer ma commande Order() */
             $order= New Order();
+            $reference = $date->format('dmY').'-'.uniqid();
+            $order->setReference($reference);
             $order->setUser($this->getUser());
             $order->setCreatedAt($date);
             $order->setCarrierName($carrier->getName());
             $order->setCarrierPrice($carrier->getPrice());
             $order->setDelivery($delivery_content);
-            $order->setIsPaid(0);
+            $order->setState(0);
 
             $this->entityManager->persist($order);
-
-            /* enregistrer mes produits OrderDetails() */
 
             foreach($cart->getFull() as $product){
                 $orderDetails = New OrderDetails();
@@ -96,16 +96,16 @@ class OrderController extends AbstractController
                 $orderDetails->setQuantity($product['quantity']);
                 $orderDetails->setPrice($product['product']->getPrice());
                 $orderDetails->setTotal($product['product']->getPrice() * $product['quantity']);
-
                 $this->entityManager->persist($orderDetails);
             }
 
             $this->entityManager->flush();
-            
+
             return $this->render('order/add.html.twig',[
                 'cart' => $cart->getFull(),
                 'carrier' => $carrier,
-                'delivery' =>$delivery_content
+                'delivery' => $delivery_content,
+                'reference' => $order->getReference(),
             ]);
         }
 

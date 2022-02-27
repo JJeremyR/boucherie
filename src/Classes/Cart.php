@@ -69,18 +69,21 @@ class Cart
     {
         $cartComplete = [];
 
-        foreach ($this->get() as $id => $quantity){
-            $productObject = $this->entityManager->getRepository(Product::class)->findOneById($id);
+        if ($this->get()){
+            foreach ($this->get() as $id => $quantity){
+                $productObject = $this->entityManager->getRepository(Product::class)->findOneById($id);
             
-            if(!$productObject){
-                $this->delete($id);
-                continue;
+                if(!$productObject){
+                    $this->delete($id);
+                    continue;
+                } else {
+                    $cartComplete[] = [
+                        'product' => $productObject,
+                        'quantity' => $quantity,
+                    ];
+                }
             }
-
-            $cartComplete[] = [
-                'product' => $productObject,
-                'quantity' => $quantity,
-            ];
+            
         }
         return $cartComplete;
     }

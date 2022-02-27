@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réinitialisation Du Mot De Passe{% endblock %}
+
+{% block content %}
+    <div class="block-small td-light">
+        {% for message in app.flashes('notice') %}
+            <div class="alert alert-warning">
+                {{ message|raw }}
+            </div>
+        {% endfor %}
+        <form method="post">
+            <h1 class="h3 m-3 font-weight-normal">Réinitialisation Du Mot De Passe</h1>
+            <label class="m-3" for="inputEmail">Adresse Email</label>
+            <input type="email" name="email" id="inputEmail" class="form-control m-3" autocomplete="email" required autofocus>
+
+            <br>
+            <button class="btn-lg btn-block btn-warning m-3" type="submit">
+                Réinitialiser
+            </button>
+            <hr>
+            <p class="text-center m-3">
+                Ou souhaitez-vous 
+                <a href="{{ path('app_login') }}" >
+                     vous connecter ?
+                </a>
+            </p>
+        </form>
+    </div>
+
+{% endblock %}

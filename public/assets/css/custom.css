@@ -18,7 +18,7 @@ a{text-decoration: none;}
     height: 200px;
 }
 .navbar-item-custom, .navbar-item-custom a{
-    color: white;
+    color: black;
 }
 .footer-custom{
     text-align: center;
@@ -29,6 +29,14 @@ a{text-decoration: none;}
     background-image: url(../img/header.jpg);
     padding-top: 25px;
     margin-top: 50px;
+}
+.footer-custom p{
+    color:black;
+    mix-blend-mode: color-burn;
+}
+.footer-custom a{
+    color:black;
+    text-decoration:none;
 }
 .product-container{
     margin-bottom: 150px;
@@ -86,10 +94,31 @@ a{text-decoration: none;}
 }
 .order-summary{
     padding: 20px;
-    margin-top: 22px;
-    
+    margin-top: 22px;   
 }
-
 .td-light{
-    color:white;
+    color:white !important;
+}
+textarea {
+    resize:none;
+}
+.account-item{
+    padding:40px;
+    margin: 10px;
+    border-radius: 15px;
+    border: 2px solid #7D6608;
+}
+.account-item-a{
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bolder;
+    color: black;
+}
+.account-item-a:hover{
+    text-decoration: none;
+    color: white;
+}
+.account-item:hover img{
+    filter: invert(100%);
 }

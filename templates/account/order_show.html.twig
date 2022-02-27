@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande N° {{ order.reference }}{% endblock %}
+
+{% block content %}
+    <div class="td-light">
+        <h1>Contenu De La Commande N° {{ order.reference }}</h1>
+            <br>
+            c'est ici que vous pourrez revoir le contenu de votre commande.
+            <br>
+            <a href="{{ path('account_order') }}"> Retour au compte </a><br>
+            <br>
+            <strong>Statut De La Commande:</strong>
+
+                    {% if order.state == 1 %}
+                        <span class="badge badge-info">
+                            Commande Payée
+                        </span>
+                        {% elseif order.state == 2 %}
+                            <span class="badge badge-primary">
+                                Commande En Cours De Préparation
+                            </span>
+                            {% elseif order.state == 3 %}
+                                <span class="badge badge-warning">
+                                    Commande En Cours De Livraison
+                                </span>
+                                {% elseif order.state == 4 %}
+                                    <span class="badge badge-success">
+                                        Commande Receptionnée
+                                    </span>
+                                    {% else %}
+                                        <span class="badge badge-danger">
+                                            Commande non validée
+                                        </span>
+                    {% endif %}
+                
+
+            <br>
+            <strong>Commande Passée Le:</strong> {{ order.createdAt|date('d/m/Y') }}
+            <strong>Référence De La Commande:</strong> {{ order.reference }}
+            <strong>Transporteur Choisi: </strong> {{ order.carrierName }}
+            <hr>
+            <strong>Details:</strong>
+    </div>
+                <div>
+                    <table class="table table-dark table-hover td-light">
+                        <thead>
+                            <th scope="col">Produit</th>
+                            <th scope="col"></th>
+                            <th scope="col">Prix</th>
+                            <th scope="col">Quantité</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Facture</th>
+                        </thead>
+                        <tbody>
+                            {% for product in order.orderDetails %}
+                            <tr>
+                                <td>
+                                    IMG
+                                </td>
+                                <td> {{ product.product }} </td>
+                                <td> {{ (product.price / 100)|number_format(2,',','.') }} € </td>
+                                <td> {{ product.quantity }} </td>
+                                <td> {{ (product.total / 100)|number_format(2,',','.') }} € </td>
+                                <td> <a href="">PICTO</a> </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="text-right td-light">
+                    <strong class="m-2">Sous-Total:</strong> {{ (order.getTotal / 100)|number_format(2,',','.') }} € <br>
+                    <strong class="m-2">Frais De Port:</strong> {{ (order.carrierPrice / 100)|number_format('2',',','.') }} € <br>
+                    <strong class="m-2">Total:</strong> {{ ((order.carrierPrice + order.getTotal) / 100)|number_format(2,',','.') }} € <br>
+                    </div>
+                </div>
+        <br>
+{% endblock %}

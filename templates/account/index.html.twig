@@ -8,10 +8,55 @@
         Bienvenue {{app.user.firstname}} dans votre compte.<br> c'est ici que vous pourrez gerer vos informations personnelles.
         <br>
         <br>
-        <h3>TODO LIST:</h3>
-        - <a href="{{ path('account_password') }}"> Modifier mon MDP </a><br>
-        - <a href="{{ path('account_adress') }}"> Ajouter mes adresses </a><br>
-        - Page Mes commandes <br>
+        <h3>Parametres:</h3>
+        <br>
+        {% if is_granted ('ROLE_ADMIN') %}
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{{ path('admin') }}" class="account-item-a">
+                        <div class="account-item bg-warning text-center"> 
+                            <img src="{{ asset('assets/img/admin.png') }}" alt="Acceder Au BackOffice" width="80px"> 
+                            <br> 
+                            <br>
+                            <span> Acceder Au BackOffice </span>                         
+                        </div>
+                    </a>            
+                </div>
+            </div>
+        {% endif %}
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="{{ path('account_password') }}" class="account-item-a">
+                    <div class="account-item bg-warning text-center">                 
+                        <img src="{{ asset('assets/img/password.jpg') }}" alt="Modifier mon Mot De Passe" width="50px"> 
+                        <br> 
+                        <br>
+                        <span> Modifier mon Mot De Passe </span> 
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="{{ path('account_adress') }}" class="account-item-a"> 
+                    <div class="account-item bg-warning text-center">
+                        <img src="{{ asset('assets/img/adresses.png') }}" alt="Gerer mes adresses" width="50px">
+                        <br>
+                        <br>
+                        <span> Gerer mes adresses </span>
+                    </div>    
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="{{ path('account_order') }}" class="account-item-a">
+                    <div class="account-item bg-warning text-center">
+                        <img src="{{ asset('assets/img/commandes.png') }}" alt=" Mes commandes" width="50px">
+                        <br>
+                        <br>                    
+                        <span> Mes commandes </span>
+                    </div>
+                </a>
+            </div>
+        </div>
         <br>
     </div>
 {% endblock %}

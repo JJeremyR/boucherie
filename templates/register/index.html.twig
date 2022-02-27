@@ -3,6 +3,12 @@
 {% block title %}Inscription Boucherie{% endblock %}
 
 {% block content %}
+    {% if notif %}
+        <div class="alert alert-warning">
+            {{ notif }}
+        </div>
+        <hr>
+    {% endif %}
     <div class="td-light">
         <h1>Formulaire D'inscription</h1>
         <br>

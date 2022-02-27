@@ -11,7 +11,8 @@
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
-
+{% block javascript %}
+{% endblock %}
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -50,14 +51,14 @@
                             <a class="nav-link" href="{{ path('home') }}">Qui Sommes-Nous ?</a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="{{ path('home') }}">Contact</a>
+                            <a class="nav-link" href="{{ path('contact') }}">Contact</a>
                         </li>
                     </ul>
                         <div class="navbar-item-custom">
                             {% if app.user %}
-                                <a href="{{ path('account') }}"> Mon Compte <small>( {{ app.user.firstname }} )</small></a> | <a href="{{ path('app_logout') }}"> Déconnexion </a>
+                                <a href="{{ path('account') }}" class="btn btn-warning"> Mon Compte <small>( {{ app.user.firstname }} )</small></a> | <a href="{{ path('app_logout') }}" class="btn btn-secondary"> Déconnexion </a>
                                 {% else %}
-                                    <a href="{{ path('app_login') }}"> Connexion </a> | <a href="{{ path('register') }}"> Inscription </a>
+                                    <a href="{{ path('app_login') }}" class="btn btn-warning"> Connexion </a> | <a href="{{ path('register') }}" class="btn btn-secondary"> Inscription </a>
                             {% endif %}
                         </div>
                         <a href="{{ path('cart') }}">
@@ -77,22 +78,32 @@
         {% if block('carousel') is defined %}
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                {% for key,header in headers %}
+                    <li data-target="#myCarousel" data-slide-to="{{ key }}" {% if key == 0 %}class="active"{% endif %}></li>
+                     
+                {% endfor %}
+<!--
                     <li data-target="#myCarousel" data-slide-to="1"></li>
                     <li data-target="#myCarousel" data-slide-to="2"></li>
+-->
                 </ol>
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
+                {% for key,header in headers %}
+                    
+                    <div class="carousel-item {% if key == 0 %}active{% endif %}">
+                        <img src="/headers/{{ header.illustration }}" alt="{{ header.title }}" style="background-size:cover;">
                         <div class="container">
                             <div class="carousel-caption text-left">
-                                <h1>Example headline.</h1>
-                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                                <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+                                <h1>{{ header.title }}</h1>
+                                <p>{{ header.content }}</p>
+                                <p><a class="btn btn-lg btn-warning" href="{{ header.btnUrl }}" role="button">{{ header.btnTitle }}</a></p>
                             </div>
                         </div>
                     </div>
-                    <div class="carousel-item">
+
+                {% endfor %}
+<!--                    <div class="carousel-item">
+<svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
                         <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
                         <div class="container">
                             <div class="carousel-caption">
@@ -112,6 +123,7 @@
                             </div>
                         </div>
                     </div>
+-->                    
                 </div>
                 <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -137,12 +149,17 @@
     </main>
     <!-- FOOTER -->
     <footer class="footer-custom">
-        <p>&copy; 2022 Boucherie Paux <br>
-           <small> - Ici on vend la PAUX de bête avant de l'avoir tuée - <br>
-            &middot; <a href="#">Vie Privée</a> &middot; <a href="#">Mentions Legales</a> &middot; </small>
+        <p>
+            <b>
+                &copy; 2022 Boucherie Paux <br>
+                <span> - Ici on vend la PAUX de bête avant de l'avoir tuée - <br>
+                &middot; <a href="#">Vie Privée</a> &middot; <a href="#">Mentions Legales</a> &middot; </span>
+            </b>
         </p>
     </footer>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
+{% block script %}
+{% endblock %}
 </body>
 </html>
