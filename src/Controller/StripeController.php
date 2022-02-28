@@ -9,11 +9,19 @@ use Doctrine\ORM\EntityManagerInterface;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class StripeController extends AbstractController
 {
+    public function __construct() 
+    {
+        (new Dotenv())->bootEnv(dirname(__DIR__) . '/../.env');
+        $this->stripe_api_key = $_ENV['STRIPE_APIKEY_PUBLIC'];
+        $this->stripe_api_key_secret = $_ENV['STRIPE_APIKEY_PRIVATE'];
+    }
+
     /**
      * @Route("/commande/create-session/{reference}", name="stripe_create_session")
      */
@@ -58,7 +66,7 @@ class StripeController extends AbstractController
         ];
 
         //cle privée stripe sk_test_code
-        Stripe::setApiKey('');
+        Stripe::setApiKey($this->stripe_api_key_secret);
 
         $checkout_session = Session::create([
             'customer_email' => $order->getUser()->getEmail(),
