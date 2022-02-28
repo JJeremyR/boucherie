@@ -25,7 +25,7 @@ class HomeController extends AbstractController
      */
     public function index(): Response
     {
-dd(getenv('MJ_APIKEY_PRIVATE'));
+
 
         $products = $this->entityManager->getRepository(Product::class)->findByIsBest(1);
         $headers = $this->entityManager->getRepository(Header::class)->findAll();
