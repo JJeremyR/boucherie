@@ -50,8 +50,7 @@ class CartController extends AbstractController
 
         return $this->redirectToRoute('cart');
         //return $this->render('cart/index.html.twig');
-    }
-
+    }   
 
     /**
      * @Route("/cart/remove", name="remove_my_cart")
