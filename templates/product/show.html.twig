@@ -13,7 +13,25 @@
             <span class="product-page-price">{{ (product.price / 100)|number_format(2, ',', '.') }} €</span>
             <hr>
             <p>{{ product.description }}</p>
-            <a class="btn btn-warning" href="{{ path('add_to_cart', {'id': product.id }) }}">Ajouter Au Panier</a>
+            <br>
+            <form action="" method="POST">
+                <label for="quantity">Quantité : </label>
+                <select name="quantity" id="">
+                    <option value="" selected disabled>0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <hr>
+                <a class="btn btn-warning" href="{{ path('add_to_cart', {'id': product.id }) }}">Ajouter Au Panier</a>
+            </form>
         </div>
     </div>
     <hr>

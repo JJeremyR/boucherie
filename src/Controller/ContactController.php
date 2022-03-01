@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classes\Cart;
 use App\Classes\Mail;
 use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,7 +15,7 @@ class ContactController extends AbstractController
     /**
      * @Route("/contact", name="contact")
      */
-    public function index(Request $request): Response
+    public function index(Cart $cart, Request $request): Response
     {
         $notif = null;
 
@@ -70,7 +71,8 @@ class ContactController extends AbstractController
         }
 
         return $this->render('contact/index.html.twig', [
-            'form'=>$form->createView(),
+            'form' => $form->createView(),
+            'cart' => $cart->getFull(),
             //'notif' => $notif,
         ]);
     }

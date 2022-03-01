@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classes\Cart;
 use App\Classes\Mail;
 use App\Entity\ResetPassword;
 use App\Entity\User;
@@ -26,7 +27,7 @@ class ResetPasswordController extends AbstractController
     /**
      * @Route("/reinitialisation-mot-de-passe", name="reset_password")
      */
-    public function index(Request $request): Response
+    public function index(Cart $cart, Request $request): Response
     {
         if ($this->getUser()) {
             return $this->redirectToRoute('home');
@@ -68,14 +69,14 @@ class ResetPasswordController extends AbstractController
         }
 
         return $this->render('reset_password/index.html.twig', [
-            
+            'cart' =>$cart->getFull(),
         ]);
     }
 
     /**
      * @Route("/modification-mot-de-passe/{token}", name="update_password")
      */
-    public function update($token, Request $request, UserPasswordHasherInterface $encoder): Response
+    public function update(Cart $cart, $token, Request $request, UserPasswordHasherInterface $encoder): Response
     {
         $reset_password = $this->entityManager->getRepository(ResetPassword::class)->findOneByToken($token);
 
@@ -108,6 +109,7 @@ class ResetPasswordController extends AbstractController
 
         return $this->render('reset_password/update.html.twig', [
             'form' => $form->createView(),
+            'cart' => $cart->getFull(),
         ]);
     }
 

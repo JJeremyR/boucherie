@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classes\Cart;
 use App\Classes\Mail;
 use App\Entity\Header;
 use App\Entity\Product;
@@ -23,13 +24,14 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(): Response
-    {
+    public function index(Cart $cart): Response
+    {      
         $products = $this->entityManager->getRepository(Product::class)->findByIsBest(1);
         $headers = $this->entityManager->getRepository(Header::class)->findAll();
         return $this->render('home/index.html.twig', [
             'products' => $products,
-            'headers' =>$headers,
+            'headers' => $headers,
+            'cart' => $cart->getFull(),
         ]);
     }
 }

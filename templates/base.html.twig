@@ -35,36 +35,65 @@
 <body>
     <header>
         <div class="container-custom">
-            <nav class="navbar navbar-expand-md navbar-dark navbar-custom">
+            <nav class="navbar navbar-expand-md navbar-light navbar-custom">
                 <a class="navbar-brand" href="{{ path('home') }}">
                     <img src="{{ asset('assets/img/brand.png') }}" alt="" height="200px">
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler m-3" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">
+                    <img class="m-3" src="{{ asset('assets/img/burger.png') }}" alt="Menu" style="height:35px;">
+                    </span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
+                    <ul class="navbar-nav mr-auto text-center">
+                        <li class="nav-item active text-center">
+                            <a class="nav-link" href="{{ path('products') }}">
+                                <img src="{{ asset('assets/img/produit.png') }}" alt="Nos Produits" class="menu-icon">                            
+                            </a>                
                             <a class="nav-link" href="{{ path('products') }}">Nos Produits</a>
                         </li>
                         <li class="nav-item active">
+                            <a class="nav-link" href="{{ path('about_us') }}">
+                                <img src="{{ asset('assets/img/about.png') }}" alt="Qui Sommes Nous ?" class="menu-icon">                            
+                            </a>
                             <a class="nav-link" href="{{ path('about_us') }}">Qui Sommes-Nous ?</a>
                         </li>
                         <li class="nav-item active">
+                            <a class="nav-link" href="{{ path('contact') }}">
+                                <img src="{{ asset('assets/img/contact.png') }}" alt="Contact" class="menu-icon">                            
+                            </a>
                             <a class="nav-link" href="{{ path('contact') }}">Contact</a>
+                        </li>
+                        <li class="nav-item active">
+                            {% if cart|length > 0 %}
+                                {% set article = 0 %}
+                                {% for product in cart %}
+                                    {% set article = article + (product.quantity) %}
+                                {% endfor %}
+                                <span class="position-absolute top-50 start-50 translate-middle badge border border-light rounded-pill bg-danger p-2 zindex-dropdown">
+                                        <p class="text-light mb-0">
+                                         {{ article }} 
+                                        </p>
+                                </span>
+                            {% endif %}
+                                <a class="nav-link" href="{{ path('cart') }}">
+                                    <img src="{{ asset('assets/img/shopping-cart.png') }}" class="cart-icon" alt="Mon Panier">   
+                                </a>
+                                <a class="nav-link" href="{{ path('cart') }}">Mon Panier</a>
                         </li>
                     </ul>
                         <div class="navbar-item-custom">
                             {% if app.user %}
-                                <a href="{{ path('account') }}" class="btn btn-warning"> Mon Compte <small>( {{ app.user.firstname }} )</small></a> | <a href="{{ path('app_logout') }}" class="btn btn-secondary"> Déconnexion </a>
+                                <a href="{{ path('account') }}" class="btn btn-lg btn-warning"> Mon Compte <small>( {{ app.user.firstname }} )</small></a>
+                                <a href="{{ path('app_logout') }}" class="btn btn-lg btn-secondary"> Déconnexion </a>
                                 {% else %}
-                                    <a href="{{ path('app_login') }}" class="btn btn-warning"> Connexion </a> | <a href="{{ path('register') }}" class="btn btn-secondary"> Inscription </a>
+                                    <a href="{{ path('app_login') }}" class="btn btn-lg btn-warning"> Connexion </a>
+                                    <a href="{{ path('register') }}" class="btn btn-lg btn-secondary"> Inscription </a>
                             {% endif %}
-                        </div>
-                        <a href="{{ path('cart') }}">
-                            <img src="{{ asset('assets/img/shopping-cart.png') }}" class="cart-icon" alt="Mon Panier">
-                        </a>
 
+
+                            
+                        </div>
 <!--            <form class="form-inline mt-2 mt-md-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>

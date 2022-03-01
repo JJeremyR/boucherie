@@ -21,9 +21,11 @@ class AccountAdressController extends AbstractController
     /**
      * @Route("/compte/adresses", name="account_adress")
      */
-    public function index(): Response
+    public function index(Cart $cart): Response
     {
-        return $this->render('account/adress.html.twig');
+        return $this->render('account/adress.html.twig', [
+            'cart' => $cart->getFull(),
+        ]);
     }
         /**
      * @Route("/compte/ajouter-adresse", name="add_adress")
@@ -50,12 +52,13 @@ class AccountAdressController extends AbstractController
 
         return $this->render('account/form-adress.html.twig', [
             'form' => $form->createView(),
+            'cart' => $cart->getFull(),
         ]);
     }
             /**
      * @Route("/compte/modifier-adresse/{id}", name="edit_adress")
      */
-    public function edit(Request $request, $id): Response
+    public function edit(Cart $cart, Request $request, $id): Response
     {
         $adresse = $this->entityManager->getRepository(Adress::class)->findOneById($id);
         if(!$adresse || $adresse->getUser() != $this->getUser()){
@@ -72,6 +75,7 @@ class AccountAdressController extends AbstractController
 
         return $this->render('account/form-adress.html.twig', [
             'form' => $form->createView(),
+            'cart' => $cart->getFull(),
         ]);
     }
 
