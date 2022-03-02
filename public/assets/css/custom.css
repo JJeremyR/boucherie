@@ -136,3 +136,18 @@ textarea {
 .account-item:hover img{
     filter: invert(100%);
 }
+
+.card-img-top{
+    height: 200px;
+}
+.card-body{
+    height: 200px;
+}
+
+.card-title{
+    padding-top: 20px;
+}
+
+.product-sub{
+    padding-top: 5px;
+}
