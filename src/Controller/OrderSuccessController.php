@@ -38,7 +38,8 @@ class OrderSuccessController extends AbstractController
             $mail = new Mail();
 
             $client = $order->getUser()->getFullName();
-            $message = " Votre commande N° {{ order.reference }} a bien été validée, <br> elle est actuellement en cours de preparation. <br> vous recevrez bientot un mail vous confirmant son expedition <br> ainsi que son numero de suivi <br>" ;
+            $commande = $order->getReference();
+            $message = " Votre commande N° " . $commande . " a bien été validée, <br> elle est actuellement en cours de preparation. <br> vous recevrez bientot un mail vous confirmant son expedition <br> ainsi que son numero de suivi <br>" ;
             $envoi = $order->getUser()->getEmail();
             $sujet = "Votre Commande Boucherie Paux est bien validée";
             $contenu = "Bonjour " . $client . ", <br> Merci pour votre commande. <br>" . $message;
@@ -49,6 +50,7 @@ class OrderSuccessController extends AbstractController
 
         return $this->render('order_success/index.html.twig',[
             'order' => $order,
+            'cart' => $cart->getfull(),
         ]);
     }
 }
